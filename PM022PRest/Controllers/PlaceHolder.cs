@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft;
+
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -11,20 +11,20 @@ namespace PM022PRest.Controllers
 {
     public static class PlaceHolder
     {
-        public async static Task<List<Models.Posts>> GetPosts();
+        public async static Task<List<Models.Posts>> GetPosts()
         {
             List<Models.Posts> posts = new List<Models.Posts>();
             using(HttpClient client = new HttpClient())
         {
-           var response = await ClientCertificateOption.GetAsync("https://jsonplaceholder.typicode.com/posts"); 
+           var response = await client.GetAsync("https://jsonplaceholder.typicode.com/posts"); 
             
-            if (reponse.IsSuccessStatusCode)     
+            if (response.IsSuccessStatusCode)     
         {
-            posts = JsonConvert.DeserializedObjet<List<Models.Posts>>(reponse.)
+                    posts = JsonConvert.DeserializeObject<List<Models.Posts>>(response.Content.ReadAsStringAsync().Result);
         }
         
         }
-        return posts;
+            return posts;
         }
     }
 }

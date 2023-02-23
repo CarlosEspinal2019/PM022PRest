@@ -14,5 +14,13 @@ namespace PM022PRest
         {
             InitializeComponent();
         }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            List<Models.Posts> posts = new List<Models.Posts>();
+            posts = await Controllers.PlaceHolder.GetPosts();
+        }
     }
 }
